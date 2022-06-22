@@ -1,0 +1,13 @@
+.signupContainer {
+  padding-left: 456px;
+  padding-top: 158px;
+}
+
+.signupTitle {
+  font-family: Inter;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 53px;
+  letter-spacing: -0.05em;
+  text-align: left;
+}
