@@ -9,7 +9,12 @@ import { toast } from 'react-toastify';
 import styles from '../../styles/Signup.module.css';
 import style from '../../styles/Form.module.css';
 import axios from 'axios';
-import { IData } from '../../common/interfaces/role.interface';
+import { IDataLogin } from '../../common/interfaces/role.interface';
+
+type Data = {
+  file: File;
+  crop: any;
+};
 
 const Login: NextPage = () => {
   const notify = () =>
@@ -23,7 +28,7 @@ const Login: NextPage = () => {
     resolver: yupResolver(LoginSchema),
   });
 
-  const onSubmitHandler = async (data: IData) => {
+  const onSubmitHandler = async (data: Data) => {
     try {
       const url =
         'https://auth-test-api-techinnover.herokuapp.com/api/v1/user/login';
@@ -34,19 +39,18 @@ const Login: NextPage = () => {
         document.cookie = `id=${res.data._id}`;
         reset();
       }
-    } catch (error) {
+    } catch (error: any) {
       const notify = () => toast.error(error.response.data.message);
       notify();
       console.log(error.response.data.message);
     }
-    // console.log(res.data._id);
   };
 
   return (
     <div className={styles.signupContainer}>
       <h1 className={styles.signupTitle}>Login</h1>
 
-      <form onSubmit={handleSubmit(onSubmitHandler)}>
+      <form onSubmit={handleSubmit(onSubmitHandler as any)}>
         <div className={style.formGroup}>
           <label htmlFor='email' className={style.label}>
             Email address

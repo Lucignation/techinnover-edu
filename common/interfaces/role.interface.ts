@@ -10,3 +10,8 @@ export interface IData {
   fullName: string;
   userType: string;
 }
+
+export interface IDataLogin {
+  email: string;
+  password: string;
+}

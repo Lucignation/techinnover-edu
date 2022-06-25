@@ -12,6 +12,11 @@ import Router from 'next/router';
 import styles from '../../styles/Signup.module.css';
 import style from '../../styles/Form.module.css';
 
+type Data = {
+  file: File;
+  crop: any;
+};
+
 const Signup = () => {
   const {
     register,
@@ -22,7 +27,7 @@ const Signup = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmitHandler = async (data: IData) => {
+  const onSubmitHandler = async (data: Data) => {
     console.log(data);
     const url =
       'https://auth-test-api-techinnover.herokuapp.com/api/v1/user/create';
@@ -45,7 +50,7 @@ const Signup = () => {
     <div className={styles.signupContainer}>
       <h1 className={styles.signupTitle}>Signup</h1>
 
-      <form onSubmit={handleSubmit(onSubmitHandler)}>
+      <form onSubmit={handleSubmit(onSubmitHandler as any)}>
         <div className={style.formGroup}>
           <label htmlFor='email' className={style.label}>
             Email address
