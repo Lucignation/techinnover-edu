@@ -1,11 +1,13 @@
 import type { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
+import Router from 'next/router';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginSchema } from '../../utils/yup';
 
 //styles import
 import styles from '../../styles/Signup.module.css';
 import style from '../../styles/Form.module.css';
+import axios from 'axios';
 
 const Login: NextPage = () => {
   const {
@@ -17,8 +19,17 @@ const Login: NextPage = () => {
     resolver: yupResolver(LoginSchema),
   });
 
-  const onSubmitHandler = (data) => {
+  const onSubmitHandler = async (data: any) => {
     console.log({ data });
+    const url =
+      'https://auth-test-api-techinnover.herokuapp.com/api/v1/user/login';
+    const res = await axios.post(url, data);
+    if (res.statusText === 'Created') {
+      Router.push('/profile');
+    }
+
+    document.cookie = `id=${res.data._id}`;
+    // console.log(res.data._id);
     reset();
   };
 

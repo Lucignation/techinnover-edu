@@ -5,12 +5,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../utils/yup';
 import roles from '../../assets/roles.json';
 import { IRole } from '../../common/interfaces/role.interface';
+import axios from 'axios';
+import Router from 'next/router';
 
 //styles import
 import styles from '../../styles/Signup.module.css';
 import style from '../../styles/Form.module.css';
 
-const Signup: NextPage = () => {
+const Signup = () => {
   const [role, setRole] = useState<string>('');
 
   const {
@@ -22,9 +24,15 @@ const Signup: NextPage = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmitHandler = (data) => {
-    console.log({ data });
-    reset();
+  const onSubmitHandler = async (data: any) => {
+    console.log(data);
+    const url =
+      'https://auth-test-api-techinnover.herokuapp.com/api/v1/user/create';
+    const res = await axios.post(url, data);
+
+    if (res.statusText === 'Created') {
+      Router.push('/login');
+    }
   };
 
   const options = roles.map((r: IRole) => {
@@ -95,7 +103,7 @@ const Signup: NextPage = () => {
           <br />
           <select
             onChange={(e) => setRole(e.target.value)}
-            {...register('role')}
+            {...register('userType')}
             className={style.formInput}
           >
             {options}

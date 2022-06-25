@@ -6,12 +6,12 @@
   },
   {
     "id": 2,
-    "value": "Market",
+    "value": "teacher",
     "name": "Senior Marketer"
   },
   {
     "id": 3,
-    "value": "UI",
+    "value": "student",
     "name": "Product Designer"
   }
 ]
