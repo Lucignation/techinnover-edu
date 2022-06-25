@@ -1,17 +1,12 @@
 [
   {
     "id": 1,
-    "value": "Dev",
-    "name": "Developer"
+    "value": "teacher",
+    "name": "Teacher"
   },
   {
     "id": 2,
-    "value": "teacher",
-    "name": "Senior Marketer"
-  },
-  {
-    "id": 3,
     "value": "student",
-    "name": "Product Designer"
+    "name": "Student"
   }
 ]
