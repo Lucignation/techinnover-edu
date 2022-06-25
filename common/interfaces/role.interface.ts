@@ -3,3 +3,10 @@ export interface IRole {
   value: string;
   name: string;
 }
+
+export interface IData {
+  email: string;
+  password: string;
+  fullName: string;
+  userType: string;
+}

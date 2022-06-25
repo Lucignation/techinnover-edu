@@ -3,13 +3,17 @@ import { useForm } from 'react-hook-form';
 import Router from 'next/router';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginSchema } from '../../utils/yup';
+import { toast } from 'react-toastify';
 
 //styles import
 import styles from '../../styles/Signup.module.css';
 import style from '../../styles/Form.module.css';
 import axios from 'axios';
+import { IData } from '../../common/interfaces/role.interface';
 
 const Login: NextPage = () => {
+  const notify = () =>
+    toast.success('You have successfully login to your account.');
   const {
     register,
     handleSubmit,
@@ -19,18 +23,23 @@ const Login: NextPage = () => {
     resolver: yupResolver(LoginSchema),
   });
 
-  const onSubmitHandler = async (data: any) => {
-    console.log({ data });
-    const url =
-      'https://auth-test-api-techinnover.herokuapp.com/api/v1/user/login';
-    const res = await axios.post(url, data);
-    if (res.statusText === 'Created') {
-      Router.push('/profile');
+  const onSubmitHandler = async (data: IData) => {
+    try {
+      const url =
+        'https://auth-test-api-techinnover.herokuapp.com/api/v1/user/login';
+      const res = await axios.post(url, data);
+      if (res.statusText === 'Created') {
+        notify();
+        Router.push('/profile');
+        document.cookie = `id=${res.data._id}`;
+        reset();
+      }
+    } catch (error) {
+      const notify = () => toast.error(error.response.data.message);
+      notify();
+      console.log(error.response.data.message);
     }
-
-    document.cookie = `id=${res.data._id}`;
     // console.log(res.data._id);
-    reset();
   };
 
   return (

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../utils/yup';
 import roles from '../../assets/roles.json';
-import { IRole } from '../../common/interfaces/role.interface';
+import { IData, IRole } from '../../common/interfaces/role.interface';
 import axios from 'axios';
 import Router from 'next/router';
 
@@ -13,8 +13,6 @@ import styles from '../../styles/Signup.module.css';
 import style from '../../styles/Form.module.css';
 
 const Signup = () => {
-  const [role, setRole] = useState<string>('');
-
   const {
     register,
     handleSubmit,
@@ -24,7 +22,7 @@ const Signup = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmitHandler = async (data: any) => {
+  const onSubmitHandler = async (data: IData) => {
     console.log(data);
     const url =
       'https://auth-test-api-techinnover.herokuapp.com/api/v1/user/create';
@@ -101,11 +99,7 @@ const Signup = () => {
             What is your role
           </label>
           <br />
-          <select
-            onChange={(e) => setRole(e.target.value)}
-            {...register('userType')}
-            className={style.formInput}
-          >
+          <select {...register('userType')} className={style.formInput}>
             {options}
           </select>
         </div>

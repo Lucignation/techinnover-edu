@@ -1,8 +1,13 @@
-.signupContainer {
-  padding-left: 456px;
-  padding-top: 158px;
+
+.signupContainer{
+  padding: 2rem 3rem;
+  
 }
 
+
+.signupContainer form{
+  width: 100%;
+}
 .signupTitle {
   font-family: Inter;
   font-size: 44px;
@@ -10,4 +15,19 @@
   line-height: 53px;
   letter-spacing: -0.05em;
   text-align: left;
+}
+
+
+@media (min-width: 700px){
+  .signupContainer {
+  padding-left: 226px;
+  padding-top: 158px;
+}
+}
+
+@media (min-width: 1200px){
+  .signupContainer {
+  padding-left: 456px;
+  /* padding-top: 158px; */
+}
 }
